@@ -1,0 +1,5 @@
+{
+  "name": "basic-node-project",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:1-20-bullseye",
+  "postCreateCommand": "npm test"
+}

@@ -1,0 +1,20 @@
+{
+  "name": "basic-node-project",
+  "version": "1.0.0",
+  "description": "Proyecto Node basico pensado como punto de partida para practicar una CI sencilla con GitHub Actions.",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "test": "node --test"
+  },
+  "keywords": [
+    "node",
+    "ci",
+    "github-actions"
+  ],
+  "author": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  }
+}
