@@ -1,0 +1,37 @@
+name: node ci pipeline
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Descargar el código del repositorio
+      - name: checkout code
+        uses: actions/checkout@v4
+
+      # 2. Configurar Node.js
+      - name: set up node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # 3. Instalar dependencias
+      - name: install dependencies
+        working-directory: ./basic-node-project
+        run: npm ci
+
+      # 4. Ejecutar tests
+      - name: run tests
+        working-directory: ./basic-node-project
+        run: npm test
+
+      # 5. Subir artefacto
+      - name: upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: node-project
+          path: ./basic-node-project
