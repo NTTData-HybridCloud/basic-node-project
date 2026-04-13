@@ -1,0 +1,52 @@
+# Workflow de Integración Continua para proyectos Node.js
+name: CI Node
+
+on:
+  push:
+    branches:
+      - ci-node-integration
+  pull_request:
+    branches:
+      - ci-node-integration
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      # 1. Descargar código
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # 2. Configurar Node.js 20
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          registry-url: 'https://npm.pkg.github.com'
+
+      # 3. Generar package-lock.json si no existe
+      - name: Generate package-lock.json
+        run: npm install --package-lock-only
+
+      # 4. Instalar dependencias
+      - name: Install dependencies
+        run: npm ci
+
+      # 5. Ejecutar tests
+      - name: Run tests
+        run: npm test
+
+      # 6. Construir proyecto si es necesario
+      - name: Build project if needed
+        run: npm run build --if-present
+
+      # 7. Publicar en GitHub Packages
+      - name: Publish to GitHub Packages
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

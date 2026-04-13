@@ -1,5 +1,5 @@
 {
-  "name": "basic-node-project",
+  "name": "@NTTData-HybridCloud/basic-node-project",
   "version": "1.0.0",
   "description": "Proyecto Node basico pensado como punto de partida para practicar una CI sencilla con GitHub Actions.",
   "main": "src/app.js",
@@ -16,5 +16,8 @@
   "license": "MIT",
   "engines": {
     "node": ">=20"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   }
 }
